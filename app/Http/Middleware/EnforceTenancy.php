@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Config;
+use Hyn\Tenancy\Environment;
 
 class EnforceTenancy
 {

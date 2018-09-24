@@ -16,13 +16,13 @@ use Hyn\Tenancy\Database\Connection;
 
 return [
     'models' => [
-        /**
-         * Specify different models to be used for the global, system database
-         * connection. These are also used in their relationships. Models
-         * used have to implement their respective contracts and
-         * either extend the SystemModel or use the trait
-         * UsesSystemConnection.
-         */
+    /**
+     * Specify different models to be used for the global, system database
+     * connection. These are also used in their relationships. Models
+     * used have to implement their respective contracts and
+     * either extend the SystemModel or use the trait
+     * UsesSystemConnection.
+     */
 
         // Must implement \Hyn\Tenancy\Contracts\Customer
         'customer' => \Hyn\Tenancy\Models\Customer::class,
@@ -34,14 +34,14 @@ return [
         'website' => \Hyn\Tenancy\Models\Website::class
     ],
     'website' => [
-        /**
-         * Each website has a short random hash that identifies this entity
-         * to the application. By default this id is randomized and fully
-         * auto-generated. In case you want to force your own logic for
-         * when you need to have a better overview of the complete
-         * tenant folder structure, disable this and implement
-         * your own id generation logic.
-         */
+    /**
+     * Each website has a short random hash that identifies this entity
+     * to the application. By default this id is randomized and fully
+     * auto-generated. In case you want to force your own logic for
+     * when you need to have a better overview of the complete
+     * tenant folder structure, disable this and implement
+     * your own id generation logic.
+     */
         'disable-random-id' => false,
 
         /**
@@ -103,13 +103,13 @@ return [
         'cache' => 10,
     ],
     'hostname' => [
-        /**
-         * If you want the multi tenant application to fall back to a default
-         * hostname/website in case the requested hostname was not found
-         * in the database, complete in detail the default hostname.
-         *
-         * @warn this must be a FQDN, these have no protocol or path!
-         */
+    /**
+     * If you want the multi tenant application to fall back to a default
+     * hostname/website in case the requested hostname was not found
+     * in the database, complete in detail the default hostname.
+     *
+     * @warn this must be a FQDN, these have no protocol or path!
+     */
         'default' => env('TENANCY_DEFAULT_HOSTNAME'),
         /**
          * The package is able to identify the requested hostname by itself,
@@ -137,7 +137,7 @@ return [
          *
          * @see https://hyn.readme.io/v3.0/docs/tenancy#section-hostnameabort-without-identified-hostname
          */
-        'abort-without-identified-hostname' => true,
+        'abort-without-identified-hostname' => false,
 
         /**
          * Time to cache hostnames in minutes. Set to false to disable.
@@ -145,14 +145,14 @@ return [
         'cache' => 10,
     ],
     'db' => [
-        /**
-         * The default connection to use; this overrules the Laravel database.default
-         * configuration setting. In Laravel this is normally configured to 'mysql'.
-         * You can set a environment variable to override the default database
-         * connection to - for instance - the tenant connection 'tenant'.
-         *
-         * @see https://hyn.readme.io/v3.0/docs/tenancy#section-dbdefault
-         */
+    /**
+     * The default connection to use; this overrules the Laravel database.default
+     * configuration setting. In Laravel this is normally configured to 'mysql'.
+     * You can set a environment variable to override the default database
+     * connection to - for instance - the tenant connection 'tenant'.
+     *
+     * @see https://hyn.readme.io/v3.0/docs/tenancy#section-dbdefault
+     */
         'default' => env('TENANCY_DEFAULT_CONNECTION'),
         /**
          * Used to give names to the system and tenant database connections. By
@@ -233,10 +233,10 @@ return [
     ],
     'folders' => [
         'config' => [
-            /**
-             * Merge configuration files from the config directory
-             * inside the tenant directory with the global configuration files.
-             */
+        /**
+         * Merge configuration files from the config directory
+         * inside the tenant directory with the global configuration files.
+         */
             'enabled' => true,
 
             /**
@@ -246,9 +246,9 @@ return [
             'blacklist' => ['database', 'tenancy', 'webserver'],
         ],
         'routes' => [
-            /**
-             * Allows adding and overriding URL routes inside the tenant directory.
-             */
+        /**
+         * Allows adding and overriding URL routes inside the tenant directory.
+         */
             'enabled' => true,
 
             /**
@@ -257,10 +257,10 @@ return [
             'prefix' => null,
         ],
         'trans' => [
-            /**
-             * Allows reading translation files from a trans directory inside
-             * the tenant directory.
-             */
+        /**
+         * Allows reading translation files from a trans directory inside
+         * the tenant directory.
+         */
             'enabled' => true,
 
             /**
@@ -276,16 +276,16 @@ return [
             'namespace' => 'tenant',
         ],
         'vendor' => [
-            /**
-             * Allows using a custom vendor (composer driven) folder inside
-             * the tenant directory.
-             */
+        /**
+         * Allows using a custom vendor (composer driven) folder inside
+         * the tenant directory.
+         */
             'enabled' => true,
         ],
         'media' => [
-            /**
-             * Mounts the assets directory with (static) files for public use.
-             */
+        /**
+         * Mounts the assets directory with (static) files for public use.
+         */
             'enabled' => true,
         ]
     ]
