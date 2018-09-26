@@ -34,7 +34,7 @@ class Tenant
         app(CustomerRepository::class)->delete($this->customer, true);
     }
 
-    public static function createFrom($name, $email, $password = null): Tenant
+    public static function createFrom($name, $email, $sitename, $password = null) : Tenant
     {
         // create a customer
         $customer = new Customer;
@@ -45,6 +45,7 @@ class Tenant
 
         // associate the customer with a website
         $website = new Website;
+        $website->sitename = $sitename;
         $website->customer()->associate($customer);
         app(WebsiteRepository::class)->create($website);
 
@@ -57,12 +58,12 @@ class Tenant
         // make hostname current
         app(Environment::class)->hostname($hostname);
 
-        $admin = static::makeAdmin($name, $email, $password ?: str_random());
+        $admin = static::makeAdmin($name, $email, $password ? : config('tenancy.default_pass'));
 
         return new Tenant($customer, $website, $hostname, $admin);
     }
 
-    private static function makeAdmin($name, $email, $password): User
+    private static function makeAdmin($name, $email, $password) : User
     {
         $admin = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
         $admin->guard_name = 'web';
@@ -71,7 +72,7 @@ class Tenant
         return $admin;
     }
 
-    public static function retrieveBy($name): ?Tenant
+    public static function retrieveBy($name) : ? Tenant
     {
         if ($customer = Customer::where('name', $name)->with(['websites', 'hostnames'])->first()) {
             return new Tenant($customer);

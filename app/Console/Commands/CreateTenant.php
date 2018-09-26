@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class CreateTenant extends Command
 {
-    protected $signature = 'tenant:create {name} {email}';
+    protected $signature = 'tenant:create {name} {email} {sitename}';
 
     protected $description = 'Creates a tenant with the provided name and email address e.g. php artisan tenant:create boise boise@example.com';
 
@@ -17,6 +17,7 @@ class CreateTenant extends Command
     {
         $name = $this->argument('name');
         $email = $this->argument('email');
+        $sitename = $this->argument('sitename');
 
         if ($this->tenantExists($name, $email)) {
             $this->error("A tenant with name '{$name}' and/or '{$email}' already exists.");
@@ -24,7 +25,7 @@ class CreateTenant extends Command
             return;
         }
 
-        $tenant = Tenant::createFrom($name, $email);
+        $tenant = Tenant::createFrom($name, $email, $sitename);
         $this->info("Tenant '{$name}' is created and is now accessible at {$tenant->hostname->fqdn}");
 
         // invite admin
@@ -32,7 +33,7 @@ class CreateTenant extends Command
         $this->info("Admin {$email} has been invited!");
     }
 
-    private function tenantExists($name, $email): bool
+    private function tenantExists($name, $email) : bool
     {
         return Customer::where('name', $name)->orWhere('email', $email)->exists();
     }

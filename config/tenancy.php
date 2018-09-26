@@ -25,23 +25,24 @@ return [
      */
 
         // Must implement \Hyn\Tenancy\Contracts\Customer
-        'customer' => \Hyn\Tenancy\Models\Customer::class,
+        'customer' => App\Customer::class,
 
         // Must implement \Hyn\Tenancy\Contracts\Hostname
-        'hostname' => \Hyn\Tenancy\Models\Hostname::class,
+        'hostname' => App\Hostname::class,
 
         // Must implement \Hyn\Tenancy\Contracts\Website
-        'website' => \Hyn\Tenancy\Models\Website::class
+        'website' => App\Website::class
     ],
     'website' => [
-    /**
-     * Each website has a short random hash that identifies this entity
-     * to the application. By default this id is randomized and fully
-     * auto-generated. In case you want to force your own logic for
-     * when you need to have a better overview of the complete
-     * tenant folder structure, disable this and implement
-     * your own id generation logic.
-     */
+        'default_pass' => 'p123456p',
+        /**
+         * Each website has a short random hash that identifies this entity
+         * to the application. By default this id is randomized and fully
+         * auto-generated. In case you want to force your own logic for
+         * when you need to have a better overview of the complete
+         * tenant folder structure, disable this and implement
+         * your own id generation logic.
+         */
         'disable-random-id' => false,
 
         /**

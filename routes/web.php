@@ -20,7 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('hostname', function () {
-    return config('app.url');
+    Auth::logout();
+    return redirect('/login');
 });
 Route::get('customers', function () {
     return Customer::all();

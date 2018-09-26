@@ -16,10 +16,15 @@ class GlobalViewVarsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $tenancy = app(Environment::class);
-        $hostname = $tenancy->hostname();
-        Config::set('app.url', 'http://' . $hostname->fqdn);
-        View::share('hostname', $hostname);
+        if (!app()->runningInConsole()) {
+
+            $tenancy = app(Environment::class);
+            $hostname = $tenancy->hostname();
+            if ($hostname) {
+                Config::set('app.url', 'http://' . $hostname->fqdn);
+                View::share('tenant', $tenancy);
+            }
+        }
     }
 
     /**
